@@ -1,39 +1,40 @@
 package com.example.aplicacionlista.datos
 
+import com.example.aplicacionlista.modelo.Bando
 import com.example.aplicacionlista.modelo.Personaje
 
 interface RepositorioPersonajes {
 
     fun poblar() {
         nuevoPersonaje(
-            Personaje("Benjamin Sisko", "Capitán de DS9", "Starfleet")
+            Personaje("Benjamin Sisko", "Capitán de DS9", Bando.STARFLEET)
         )
         nuevoPersonaje(
-            Personaje("Miles O'Brien", "Jefe ingeniero de DS9", "Starfleet")
+            Personaje("Miles O'Brien", "Jefe ingeniero de DS9", Bando.STARFLEET)
         )
         nuevoPersonaje(
-            Personaje("Nerys Kira", "Primer Oficial de DS9", "Bajor")
+            Personaje("Nerys Kira", "Primer Oficial de DS9", Bando.BAJOR)
         )
         nuevoPersonaje(
-            Personaje("Quark", "Dueño de \"Quark's\"", "Ferengi")
+            Personaje("Quark", "Dueño de \"Quark's\"", Bando.FERENGI)
         )
         nuevoPersonaje(
-            Personaje("Ezri Dax", "Canciller de DS9", "Starfleet")
+            Personaje("Ezri Dax", "Canciller de DS9", Bando.STARFLEET)
         )
         nuevoPersonaje(
-            Personaje("Elim Garak", "Sastre", "Bajor")
+            Personaje("Elim Garak", "Sastre", Bando.BAJOR)
         )
         nuevoPersonaje(
-            Personaje("Gal Dukat", "Gul de la Unión Cardasiana", "Cardassia")
+            Personaje("Gal Dukat", "Gul de la Unión Cardasiana", Bando.CARDASSIA)
         )
         nuevoPersonaje(
-            Personaje("Weyoun", "Vorta del Dominio", "Dominio")
+            Personaje("Weyoun", "Vorta del Dominio", Bando.DOMINION)
         )
         nuevoPersonaje(
-            Personaje("Worf", "Jefe de Seguridad en DS9", "Starfleet")
+            Personaje("Worf", "Jefe de Seguridad en DS9", Bando.STARFLEET)
         )
         nuevoPersonaje(
-            Personaje("Alexander Rozhenko", "Oficial de armamento del ya'Vang", "Klingon", "Hijo de Worf")
+            Personaje("Alexander Rozhenko", "Oficial de armamento del ya'Vang", Bando.KLINGON, "Hijo de Worf")
         )
     }
 
