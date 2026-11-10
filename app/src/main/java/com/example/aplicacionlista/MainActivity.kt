@@ -15,12 +15,11 @@ import com.example.aplicacionlista.datos.ListaPersonajes
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        val listaPersonajes = ListaPersonajes()
-    }
+//    companion object {
+//        val listaPersonajes = ListaPersonajes()
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        listaPersonajes.poblar()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)

@@ -9,12 +9,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.aplicacionlista.datos.RepositorioSingleton
+import com.example.aplicacionlista.datos.RepositorioSingletonJ
 import org.w3c.dom.Text
 
 class PersonajeActivity : AppCompatActivity() {
+
+    companion object {
+        const val NUMERO_PERS = "numero personaje"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val idPersonaje = intent.extras?.getInt("numero personaje") ?: 0
+        val idPersonaje = intent.extras?.getInt(NUMERO_PERS) ?: 0
         enableEdgeToEdge()
         setContentView(R.layout.activity_personaje)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -23,7 +30,9 @@ class PersonajeActivity : AppCompatActivity() {
             insets
         }
 
-        val personaje = MainActivity.listaPersonajes.buscar(idPersonaje)
+        val lista = RepositorioSingleton.instance.listaPersonajes
+//        val listaJ = RepositorioSingletonJ.getInstance().getRepo()
+        val personaje = lista.buscar(idPersonaje)
         findViewById<TextView>(R.id.textNombre).text = personaje.nombre
         val icono = findViewById<ImageView>(R.id.iconoGrande)
         val draw = AppCompatResources.getDrawable(this, personaje.bando.imagen)
