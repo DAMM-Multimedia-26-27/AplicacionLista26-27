@@ -25,7 +25,7 @@ interface RepositorioPersonajes {
             Personaje("Elim Garak", "Sastre", Bando.BAJOR)
         )
         nuevoPersonaje(
-            Personaje("Gal Dukat", "Gul de la Unión Cardasiana", Bando.CARDASSIA)
+            Personaje("Gul Dukat", "Gul de la Unión Cardasiana", Bando.CARDASSIA)
         )
         nuevoPersonaje(
             Personaje("Weyoun", "Vorta del Dominio", Bando.DOMINION)

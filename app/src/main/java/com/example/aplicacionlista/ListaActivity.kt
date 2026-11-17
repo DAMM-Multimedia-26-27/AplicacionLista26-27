@@ -25,4 +25,9 @@ class ListaActivity : AppCompatActivity() {
         val layout = LinearLayoutManager(this)
         recycler.layoutManager = layout
     }
+
+    override fun onResume() {
+        findViewById<RecyclerView>(R.id.lista).adapter?.notifyDataSetChanged()
+        super.onResume()
+    }
 }

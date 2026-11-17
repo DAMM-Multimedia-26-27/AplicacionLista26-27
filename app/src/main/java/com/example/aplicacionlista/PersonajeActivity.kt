@@ -1,12 +1,17 @@
 package com.example.aplicacionlista
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.aplicacionlista.datos.RepositorioSingleton
@@ -19,9 +24,11 @@ class PersonajeActivity : AppCompatActivity() {
         const val NUMERO_PERS = "numero personaje"
     }
 
+    var idPersonaje: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val idPersonaje = intent.extras?.getInt(NUMERO_PERS) ?: 0
+        idPersonaje = intent.extras?.getInt(NUMERO_PERS) ?: 0
         enableEdgeToEdge()
         setContentView(R.layout.activity_personaje)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -30,6 +37,11 @@ class PersonajeActivity : AppCompatActivity() {
             insets
         }
 
+        val barra = findViewById<Toolbar>(R.id.toolbar_personaje)
+        setSupportActionBar(barra)
+    }
+
+    override fun onResume() {
         val lista = RepositorioSingleton.instance.listaPersonajes
 //        val listaJ = RepositorioSingletonJ.getInstance().getRepo()
         val personaje = lista.buscar(idPersonaje)
@@ -43,6 +55,26 @@ class PersonajeActivity : AppCompatActivity() {
         textoDescripcion.text = personaje.descripcion
         val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
         ratingBar.rating = personaje.opinion.toFloat()
+
+        super.onResume()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_vista_personaje, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val idBoton = item.itemId
+        return when (idBoton) {
+            R.id.boton_menu_editar -> {
+                val intent = Intent(this, EditarActivity::class.java)
+                intent.putExtra(NUMERO_PERS, idPersonaje)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 

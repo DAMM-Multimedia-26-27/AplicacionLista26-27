@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".PersonajeActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_personaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
     <TextView
         android:id="@+id/textNombre"
         android:layout_width="match_parent"
@@ -83,7 +91,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:max="5"
-        android:numStars="05"
+        android:numStars="5"
         android:rating="3.5" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
