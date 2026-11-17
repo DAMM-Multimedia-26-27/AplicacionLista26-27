@@ -1,5 +1,6 @@
 package com.example.aplicacionlista.vista
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -15,17 +16,31 @@ import com.example.aplicacionlista.PersonajeActivity
 import com.example.aplicacionlista.R
 import com.example.aplicacionlista.datos.RepositorioSingleton
 
-class AdaptadorLista(val contexto: Context) : RecyclerView.Adapter<AdaptadorLista.CreadorItems>() {
+//class AdaptadorLista(private val contexto: Context) : RecyclerView.Adapter<AdaptadorLista.CreadorItems>() {
+class AdaptadorLista : RecyclerView.Adapter<AdaptadorLista.CreadorItems>() {
 
+    companion object {
+        private var instance: AdaptadorLista? = null
+
+        fun getInstance() : AdaptadorLista {
+            if (instance != null){
+                return instance!!
+            } else {
+                instance = AdaptadorLista()
+                return instance!!
+            }
+        }
+    }
     val lista = RepositorioSingleton.instance.listaPersonajes
-    val inflador = contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): CreadorItems {
+        val contexto = parent.context
+        val inflador = contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val vista = inflador.inflate(R.layout.tarjeta_personaje, parent, false)
-        return CreadorItems(vista, contexto)
+        return CreadorItems(vista, parent.context)
     }
 
     override fun onBindViewHolder(
@@ -39,7 +54,7 @@ class AdaptadorLista(val contexto: Context) : RecyclerView.Adapter<AdaptadorList
             .text = personaje.ocupacion
         holder.itemView.findViewById<TextView>(R.id.tarjeta_descripcion)
             .text = personaje.descripcion
-        val draw = AppCompatResources.getDrawable(contexto, personaje.bando.imagen)
+        val draw = AppCompatResources.getDrawable(holder.contexto, personaje.bando.imagen)
         holder.itemView.findViewById<ImageView>(R.id.icono_pequenno)
             .setImageDrawable(draw)
     }
@@ -58,7 +73,6 @@ class AdaptadorLista(val contexto: Context) : RecyclerView.Adapter<AdaptadorList
                 contexto.startActivity(intent)
             }
         }
-
     }
 }
 

@@ -20,14 +20,14 @@ class ListaActivity : AppCompatActivity() {
             insets
         }
         val recycler = findViewById<RecyclerView>(R.id.lista)
-        val adaptador = AdaptadorLista(this)
+        val adaptador = AdaptadorLista.getInstance()//AdaptadorLista(this)
         recycler.adapter = adaptador
         val layout = LinearLayoutManager(this)
         recycler.layoutManager = layout
     }
 
-    override fun onResume() {
-        findViewById<RecyclerView>(R.id.lista).adapter?.notifyDataSetChanged()
-        super.onResume()
-    }
+//    override fun onResume() {
+//        findViewById<RecyclerView>(R.id.lista).adapter?.notifyDataSetChanged()
+//        super.onResume()
+//    }
 }

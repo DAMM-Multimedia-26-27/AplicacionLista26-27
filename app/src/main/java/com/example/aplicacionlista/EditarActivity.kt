@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.aplicacionlista.datos.RepositorioSingleton
+import com.example.aplicacionlista.vista.AdaptadorLista
 
 class EditarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,15 +36,19 @@ class EditarActivity : AppCompatActivity() {
             val desc = findViewById<EditText>(R.id.editDescripcion)
             desc.setText(personaje.descripcion)
 
-            findViewById<Button>(R.id.bGuardar).setOnClickListener {
+            val bGuardar = findViewById<Button>(R.id.bGuardar)
+            bGuardar.setOnClickListener {
                 personaje.nombre = nom.text.toString()
                 personaje.ocupacion = ocup.text.toString()
                 personaje.descripcion = desc.text.toString()
                 personaje.opinion = rating.rating.toInt()
                 RepositorioSingleton.instance.listaPersonajes.actualizar(idPersonaje, personaje)
+                AdaptadorLista.getInstance().notifyItemChanged(idPersonaje)
                 finish()
             }
         } else {
+
+
 
         }
     }
